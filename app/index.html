@@ -22,10 +22,38 @@
     <!-- endbuild -->
 </head>
 
-<body>
-    <h1>Hello <output id=greeting></output>!</h1>
+<body data-ng-app="main">
+    <section data-ng-controller="SearchCtrl as search">
+        <section>
+            <section>
+                <label for="title">
+                    Authors:
+                    <input id="title" type="text" data-ng-model="search.criteria.title">
+                </label>
+                <label for="authors">
+                    Title:
+                    <input id="authors" type="text" data-ng-model="search.criteria.authors">
+                </label>
+                <button data-ng-click="search.doSearch()">Search</button>
+            </section>
+            <section data-ng-show="search.resultsNotEmpty()">
+                <table class="results">
+                    <tr>
+                        <th>Authors</th>
+                        <th>Title</th>
+                    </tr>
+                    <tr data-ng-repeat="book in search.results">
+                        <td>{{book.authors}}</td>
+                        <td>{{book.title}}</td>
+                    </tr>
+                </table>
+            </section>
+        </section>
+    </section>
+
     <!-- build:jsVendor({.tmp,app}) js/vendor.js -->
     <!-- bower:js -->
+    <script src="bower_components/angular/angular.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
